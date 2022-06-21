@@ -34,13 +34,19 @@ export default {
 </script>
 
 <!-- CSS styles -->
-<style>
+<style lang="scss" scoped>
 .twoot-item {
   padding: 20px;
   background-color: white;
   border-radius: 5px;
   border: 1px solid #dfe3e8;
   box-sizing: border-box;
+  max-width: 400px;
+  word-wrap: break-word;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 </style>

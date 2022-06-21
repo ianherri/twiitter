@@ -1,6 +1,11 @@
 <!-- HTML -->
 <template>
-  <UserProfile></UserProfile>
+  <div id="app">
+    <nav>
+      <div class="navigation__logo">Twotter</div>
+    </nav>
+    <UserProfile></UserProfile>
+  </div>
 </template>
 
 <!-- JS  -->
@@ -16,14 +21,22 @@ export default {
 </script>
 
 <!-- CSS styles -->
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  display: flex;
   min-height: 100vh;
   background-color: #f3f5fa;
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 5%;
+    background-color: deeppink;
+    color: white;
+  }
 }
 </style>
