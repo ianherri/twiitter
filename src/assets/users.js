@@ -17,7 +17,7 @@ export const users = [
     firstName: 'J.',
     lastName: 'Cole',
     email: null,
-    isAdmin: false,
+    isAdmin: true,
     twoots: [],
   },
   {
@@ -26,7 +26,7 @@ export const users = [
     firstName: 'kurtis',
     lastName: 'conner',
     email: null,
-    isAdmin: false,
+    isAdmin: true,
     twoots: [],
   },
   {
@@ -35,7 +35,7 @@ export const users = [
     firstName: 'Bo',
     lastName: 'Burnham',
     email: null,
-    isAdmin: false,
+    isAdmin: true,
     twoots: [],
   },
 ]

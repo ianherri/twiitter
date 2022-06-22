@@ -8,15 +8,15 @@
     <label for="newTwoot"
       ><strong>New Twoot</strong> ({{ newTwootCharacterCount }} / 180)</label
     >
-    <textarea id="newTwoot" rows="4" v-model="newTwootContent" />
+    <textarea id="newTwoot" rows="4" v-model="state.newTwootContent" />
 
     <div class="create-twoot-panel__submit">
       <div class="create-twoot-type">
         <label for="newTwootType"><strong>type: </strong></label>
-        <select id="newTwootType" v-model="selectedTwootType">
+        <select id="newTwootType" v-model="state.selectedTwootType">
           <option
             :value="option.value"
-            v-for="(option, index) in twootTypes"
+            v-for="(option, index) in state.twootTypes"
             :key="index"
           >
             {{ option.name }}
@@ -32,33 +32,35 @@
 <!-- JS  -->
 <!-- import then export as a component to render it -->
 <script>
+import { reactive, computed } from 'vue'
+
 export default {
   name: 'CreateTwootPanel',
-  data() {
-    // this data function returns the data the forms the state of this component
-    return {
+
+  setup(props, ctx) {
+    const state = reactive({
       newTwootContent: '',
       selectedTwootType: 'instant',
       twootTypes: [
         { value: 'draft', name: 'Draft' },
         { value: 'instant', name: 'Instant Twoot' },
       ],
-    }
-  },
-  // these seem to be computed data points
-  computed: {
-    newTwootCharacterCount() {
-      return this.newTwootContent.length
-    },
-  },
-  // these are methods for tthe component
-  methods: {
-    createNewTwoot() {
-      if (this.newTwootContent && this.selectedTwootType !== 'draft') {
-        this.$emit('add-twoot', this.newTwootContent)
-        this.newTwootContent = ''
+    })
+
+    const newTwootCharacterCount = computed(() => state.newTwootContent.length)
+
+    function createNewTwoot() {
+      if (state.newTwootContent && state.selectedTwootType !== 'draft') {
+        ctx.emit('add-twoot', state.newTwootContent)
+        state.newTwootContent = ''
       }
-    },
+    }
+
+    return {
+      state,
+      newTwootCharacterCount,
+      createNewTwoot,
+    }
   },
 }
 </script>
@@ -70,19 +72,30 @@ export default {
   display: block;
   direction: column;
 
-  button {
-    margin-top: 10px;
-    border-radius: 4px;
-  }
-
   .create-twoot-panel__submit {
     margin-top: 10px;
     display: block;
   }
 
+  textarea {
+    border: 1px solid #dfe3e8;
+    border-radius: 5px;
+    resize: none;
+  }
+
   &.--exceeded {
     color: red;
     border-color: red;
+  }
+
+  button {
+    margin-top: 10px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 4px;
+    background-color: deeppink;
+    border: 0;
+    color: white;
+    justify-self: right;
   }
 }
 h1 {
